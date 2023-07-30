@@ -7,24 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<html>--%>
-<%--<head>--%>
-<%--    <title>Title</title>--%>
-<%--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<nav class="navbar navbar-light bg-light">--%>
-<%--&lt;%&ndash;  <div class="container-fluid">&ndash;%&gt;--%>
-<%--&lt;%&ndash;    <a class="navbar-brand" href="#">QKart</a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;      <div class="col-md-3 d-flex justify-content-between">&ndash;%&gt;--%>
-<%--&lt;%&ndash;          <a href="#" class="navbar-text">Home</a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;          <a href="#" class="navbar-text">Login</a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;          <a href="<%=request.getContextPath()%>/Cart.jsp" class="navbar-text">Cart</a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;      </div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;  </div>&ndash;%&gt;--%>
-<%--</nav>--%>
-<%--</body>--%>
-<%--</html>--%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +22,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="#">Shopping Website</a>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/Home.jsp">Shopping Website</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -54,6 +37,18 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <%-- Check if the username attribute is present in the session --%>
+                    <% String username = (String) session.getAttribute("username"); %>
+                        <c:choose>
+                            <c:when test="${username != null}">
+                                <a class="nav-link" href="#"><c:out value="${username}" /></a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="nav-link" href="<%=request.getContextPath()%>/login">Login</a>
+                            </c:otherwise>
+                        </c:choose>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">

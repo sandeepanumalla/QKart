@@ -2,16 +2,18 @@ package com.example.qkart.repository;
 
 import com.example.qkart.model.Product;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.Optional;
 
 public class ProductRepository implements IProductRepository{
 
-    private final Session session;
+    private final SessionFactory sessionFactory;
+    private Session session;
 
-    public ProductRepository(Session session) {
-        this.session = session;
+    public ProductRepository(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
@@ -21,6 +23,7 @@ public class ProductRepository implements IProductRepository{
 
     @Override
     public List<Product> getAllProducts() {
+        session = sessionFactory.openSession();
         session.beginTransaction();
         String query = "FROM Product";
         List<Product> productList = session.createQuery(query, Product.class).getResultList();

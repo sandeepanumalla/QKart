@@ -7,10 +7,42 @@
         <servlet-name>Products</servlet-name>
         <servlet-class>com.example.qkart.controller.ProductsServlet</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.example.qkart.controller.LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.example.qkart.controller.RegisterServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/api/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/api/register</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>Products</servlet-name>
         <url-pattern>/products</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>com.example.qkart.filter.AuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/api/auth/*</url-pattern>
+<!--        <url-pattern>Order.jsp</url-pattern>-->
+    </filter-mapping>
     
     <welcome-file-list>
         <welcome-file>Products</welcome-file>

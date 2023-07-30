@@ -98,10 +98,10 @@
 <jsp:include page="Navbar.jsp" />
 <!-- Banner Section -->
 <section class="jumbotron">
-  <div class="container">
+  <div class="container text-dark">
     <h1>Welcome to Our E-commerce Store</h1>
     <p>Shop the best products with amazing deals!</p>
-    <a href="#" class="btn btn-primary">Explore Now</a>
+    <a href="<%=request.getContextPath()%>/products" class="btn btn-primary">Explore Now</a>
   </div>
 </section>
 

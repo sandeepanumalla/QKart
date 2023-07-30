@@ -3,7 +3,6 @@ package com.example.qkart.service;
 
 import com.example.qkart.model.Product;
 import com.example.qkart.repository.IProductRepository;
-import com.example.qkart.repository.ProductRepository;
 
 import java.util.List;
 

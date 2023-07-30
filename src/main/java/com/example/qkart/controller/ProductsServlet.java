@@ -31,14 +31,7 @@ public class ProductsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getServletPath();
-        switch (action) {
-            case "/products":
-                listProducts(req, resp);
-                break;
-            default:
-
-                break;
-        }
+            listProducts(req, resp);
     }
 
     @Override

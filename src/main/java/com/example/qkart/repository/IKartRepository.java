@@ -11,4 +11,5 @@ public interface IKartRepository {
 
     List<Kart> getProductsByUserId(int userId);
 
+    public Kart findById(Kart.KartProductKey kartProductKey);
 }
