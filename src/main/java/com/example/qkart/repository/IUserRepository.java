@@ -11,4 +11,6 @@ public interface IUserRepository {
 
     Optional<User> finduserByUsername(String username);
 
+    User findById(int userId);
+
 }

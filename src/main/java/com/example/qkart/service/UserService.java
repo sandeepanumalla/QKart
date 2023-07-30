@@ -64,6 +64,7 @@ public class UserService implements IUserService{
             }
         }
 
+
         User user = modelMapper.map(userRegisterRequest, User.class);
         user.setDateCreated(new Date());
         userRepository.save(user);

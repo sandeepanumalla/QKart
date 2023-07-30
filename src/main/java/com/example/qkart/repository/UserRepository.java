@@ -50,4 +50,10 @@ public class UserRepository implements IUserRepository{
         }
         return Optional.empty();
     }
+
+    @Override
+    public User findById(int userId) {
+        return session.find(User.class, userId);
+    }
+
 }
