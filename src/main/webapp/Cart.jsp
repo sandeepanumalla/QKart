@@ -20,7 +20,7 @@
         </div>
     </c:if>
 
-  <h3>This is Cart Page</h3>
+<%--  <h3>This is Cart Page</h3>--%>
 
 
 </body>

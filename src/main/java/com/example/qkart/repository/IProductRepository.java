@@ -11,6 +11,6 @@ public interface IProductRepository {
 
     List<Product> getAllProducts();
 
-    Optional<Product> getProductById();
+    Optional<Product> getProductById(int productId);
 
 }

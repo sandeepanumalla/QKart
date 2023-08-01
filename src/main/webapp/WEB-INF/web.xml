@@ -18,6 +18,11 @@
         <servlet-class>com.example.qkart.controller.RegisterServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>AddToCart</servlet-name>
+        <servlet-class>com.example.qkart.controller.AddToCartServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/api/login</url-pattern>
@@ -33,6 +38,12 @@
         <url-pattern>/products</url-pattern>
     </servlet-mapping>
 
+
+    <servlet-mapping>
+        <servlet-name>AddToCart</servlet-name>
+        <url-pattern>/api/protected/addToCart</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>AuthFilter</filter-name>
         <filter-class>com.example.qkart.filter.AuthFilter</filter-class>
@@ -40,12 +51,12 @@
 
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
-        <url-pattern>/api/auth/*</url-pattern>
-<!--        <url-pattern>Order.jsp</url-pattern>-->
+        <url-pattern>/api/protected/*</url-pattern>
     </filter-mapping>
     
     <welcome-file-list>
         <welcome-file>Products</welcome-file>
+        <welcome-file>Home.jsp</welcome-file>
     </welcome-file-list>
     
     <listener>

@@ -10,4 +10,5 @@ public interface IUserService {
     void logout();
 
     void register(UserRegisterRequest userRegisterRequest) throws Exception;
+
 }

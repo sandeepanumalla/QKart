@@ -46,20 +46,22 @@ public class KartService implements IKartService{
                 throw new IllegalArgumentException("Invalid products with quantities to add.");
             }
 
-            User user = userRepository.findById(userId);
-            Kart.KartProductKey kartProductKey = new Kart.KartProductKey(user, product);
-            Kart existingKartItem = kartRepository.findById(kartProductKey);
+//            User user = userRepository.findById(userId);
+//            Kart.KartProductKey kartProductKey = new Kart.KartProductKey(user, product);
+//            Kart existingKartItem = kartRepository.findById(kartProductKey);
 
-            if(existingKartItem != null) {
-                int currentQuantity = existingKartItem.getQuantity();
-                existingKartItem.setQuantity(currentQuantity + quantityToAdd);
-            } else {
-                Kart newKartItem = Kart.builder()
-                        .id(kartProductKey)
-                        .quantity(quantityToAdd)
-                        .build();
-                kartRepository.save(newKartItem);
-            }
+//            if(existingKartItem != null) {
+//                int currentQuantity = existingKartItem.getQuantity();
+//                existingKartItem.setQuantity(currentQuantity + quantityToAdd);
+//                kartRepository.update(existingKartItem);
+//            } else {
+//                Kart newKartItem = Kart.builder()
+//                        .id(kartProductKey)
+//                        .quantity(quantityToAdd)
+//                        .build();
+//                kartRepository.save(newKartItem);
+//            }
+
         }
     }
 
@@ -67,4 +69,26 @@ public class KartService implements IKartService{
     public int getProductCountByUser() {
         return 0;
     }
+
+    @Override
+    public void removeProduct(String productId) {
+
+    }
+
+    @Override
+    public void clearCart() {
+
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public int getCartSize() {
+        return 0;
+    }
+
+
 }

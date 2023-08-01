@@ -53,7 +53,11 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public User findById(int userId) {
-        return session.find(User.class, userId);
+        this.session = sessionFactory.openSession();
+        this.session.beginTransaction();
+        User user = session.find(User.class, userId);
+        this.session.getTransaction().commit();
+        return user;
     }
 
 }

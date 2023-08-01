@@ -14,4 +14,12 @@ public interface IKartService {
 
     int getProductCountByUser();
 
+
+    public void removeProduct(String productId);
+
+    public void clearCart();
+
+    public boolean isEmpty();
+
+    public int getCartSize();
 }

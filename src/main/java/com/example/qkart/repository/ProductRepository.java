@@ -33,7 +33,11 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
-    public Optional<Product> getProductById() {
-        return Optional.empty();
+    public Optional<Product> getProductById(int productId) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Product product = session.find(Product.class, productId);
+        session.getTransaction().commit();
+        return Optional.of(product);
     }
 }

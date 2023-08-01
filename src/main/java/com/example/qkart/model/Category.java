@@ -3,27 +3,25 @@ package com.example.qkart.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.*;
 
 @Entity
-public enum Category {
-    MEN_CLOTHES,
-
-    FEMALE_SHOES,
-
-    E_CIGRARETTES;
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Category {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "category_id", nullable = false)
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
+    private String categoryName;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @OneToMany(mappedBy = "category")
+    private List<Product> product;
+
 }

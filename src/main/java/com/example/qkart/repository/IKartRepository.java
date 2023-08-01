@@ -14,4 +14,5 @@ public interface IKartRepository {
     public Kart findById(Kart.KartProductKey kartProductKey);
 
 
+    void update(Kart existingKartItem);
 }

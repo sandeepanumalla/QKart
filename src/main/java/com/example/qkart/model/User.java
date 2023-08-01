@@ -28,9 +28,9 @@ public class User {
     @Temporal(TemporalType.DATE)
     private Date dateCreated;
 
-    @OneToOne(mappedBy = "id.user",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "id.user")
     private Kart kart;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Orders> orderList;
 }

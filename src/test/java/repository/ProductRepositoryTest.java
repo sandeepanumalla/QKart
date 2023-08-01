@@ -1,20 +1,26 @@
 package repository;
 
 import com.example.qkart.model.Product;
+import com.example.qkart.repository.IProductRepository;
+import com.example.qkart.repository.ProductRepository;
 import com.example.qkart.repository.SessionProvider;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
+import java.util.Optional;
 
 public class ProductRepositoryTest {
 
     private Session session;
+    private IProductRepository productRepository;
 
     @BeforeEach
     public void setup() {
         session = SessionProvider.createSession();
+        productRepository = new ProductRepository(SessionProvider.getSessionFactory());
     }
 
     @Test
@@ -31,6 +37,14 @@ public class ProductRepositoryTest {
 
         transaction.commit();
         session.close();
+    }
+
+    @Test
+    public void findProductById() {
+        int productId = 1;
+        Optional<Product> product = productRepository.getProductById(productId);
+        Assertions.assertTrue(product.isPresent());
+        Assertions.assertEquals(product.get().getProductId(), productId);
     }
 
     @Test

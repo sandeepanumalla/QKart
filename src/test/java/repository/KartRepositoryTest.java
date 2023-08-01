@@ -7,6 +7,7 @@ import com.example.qkart.repository.IKartRepository;
 import com.example.qkart.repository.KartRepository;
 import com.example.qkart.repository.SessionProvider;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,19 +19,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class KartRepositoryTest {
 
-    private Session session;
+    private SessionFactory sessionFactory;
     private IKartRepository kartRepository;
 
 
     @BeforeEach
     public void setup() {
-        session = SessionProvider.createSession();
-        this.kartRepository = new KartRepository(session);
+        sessionFactory = SessionProvider.getSessionFactory();
+        this.kartRepository = new KartRepository(sessionFactory);
     }
 
     @Test
     public void saveTest() {
-        Transaction transaction = session.beginTransaction();
+//        Transaction transaction = sessionFactory.openSession().beginTransaction();
         Product product = Product.builder()
                 .productId(2)
                 .description("The Minimalist Slim Leather Watch")
@@ -56,20 +57,23 @@ public class KartRepositoryTest {
                 .quantity(1)
                 .build();
 
-        session.persist(kart);
 
-        transaction.commit();
-        session.close();
+        kartRepository.save(kart);
+//        session.persist(kart);
+//
+//        transaction.commit();
+//        session.close();
     }
 
     @Test
     public void getAllProducts() {
-        session.beginTransaction();
-        String query = "FROM Product";
-        List<Product> productList = session.createQuery(query, Product.class).getResultList();
-        session.getTransaction().commit();
-        session.get(Product.class, 1);
-        System.out.println(productList);
+//        session.beginTransaction();
+//        String query = "FROM Product";
+//        List<Product> productList = session.createQuery(query, Product.class).getResultList();
+//        session.getTransaction().commit();
+//        session.get(Product.class, 1);
+//        kartRepository.ge
+//        System.out.println(productList);
     }
 
     @Test

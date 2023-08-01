@@ -5,13 +5,11 @@ import com.example.qkart.repository.IUserRepository;
 import com.example.qkart.repository.SessionProvider;
 import com.example.qkart.repository.UserRepository;
 import jakarta.persistence.PersistenceException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -85,5 +83,13 @@ public class UserRepositoryTest {
         Optional<User> result = userRepository.finduserByUsername(username);
 
         Assertions.assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void findByIdTest() {
+        int userId = 20;
+        User user = userRepository.findById(userId);
+        Assertions.assertNotNull(user);
+        Assertions.assertEquals(userId, user.getUserId());
     }
 }

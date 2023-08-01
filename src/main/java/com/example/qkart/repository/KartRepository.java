@@ -4,24 +4,30 @@ import com.example.qkart.model.Kart;
 import com.example.qkart.model.Product;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.util.List;
 
 public class KartRepository implements IKartRepository{
 
-    private final Session session;
+    private final SessionFactory sessionFactory;
+    private Session session;
 
-    public KartRepository(Session session) {
-        this.session = session;
+    public KartRepository(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
     public void save(Kart kart) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
         session.persist(kart);
+        session.getTransaction().commit();
     }
 
     @Override
     public List<Kart> getProductsByUserId(int userId) {
+        session = sessionFactory.openSession();
         session.beginTransaction();
         String query = "FROM Kart k where k.id.user.userId = :userId";
         Query kartQuery = session.createQuery(query, Kart.class);
@@ -32,7 +38,16 @@ public class KartRepository implements IKartRepository{
     }
 
     public Kart findById(Kart.KartProductKey kartProductKey) {
-         return session.find(Kart.class, kartProductKey);
+        session = sessionFactory.openSession();
+        return session.find(Kart.class, kartProductKey);
+    }
+
+    @Override
+    public void update(Kart existingKartItem) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.merge(existingKartItem);
+        session.getTransaction().commit();
     }
 }
 

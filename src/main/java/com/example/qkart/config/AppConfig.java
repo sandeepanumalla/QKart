@@ -1,9 +1,7 @@
 package com.example.qkart.config;
 
 import com.example.qkart.repository.*;
-import com.example.qkart.service.IUserService;
-import com.example.qkart.service.ProductsService;
-import com.example.qkart.service.UserService;
+import com.example.qkart.service.*;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import org.hibernate.Session;
@@ -27,4 +25,7 @@ public class AppConfig {
 
     public IUserService userService = new UserService(userRepository, modelMapper, validator);
 
+    public IKartRepository kartRepository = new KartRepository(sessionFactory);
+
+    public IKartService kartService = new KartService(kartRepository, userRepository);
 }
