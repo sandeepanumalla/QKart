@@ -39,11 +39,11 @@ public class ProductsServlet extends HttpServlet {
         doGet(req, resp);
     }
 
-protected void listProducts(HttpServletRequest request, HttpServletResponse response) {
+public void listProducts(HttpServletRequest request, HttpServletResponse response) {
     try {
-        List<Product> productList = appConfig.productsService.getAllProducts();
+        List<Product> productList = appConfig.productsService.getAllProductsWithFilterApplied();
         request.setAttribute("productList" , productList);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("products.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/products");
         requestDispatcher.forward(request, response);
     } catch (ServletException | IOException e) {
         throw new RuntimeException(e);

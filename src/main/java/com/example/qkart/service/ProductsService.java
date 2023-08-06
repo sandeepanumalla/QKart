@@ -6,15 +6,17 @@ import com.example.qkart.repository.IProductRepository;
 
 import java.util.List;
 
-public class ProductsService {
+public class ProductsService implements IProductsService{
 
-    public final IProductRepository productRepository;
+    public IProductRepository productRepository;
 
     public ProductsService(IProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
-    public List<Product> getAllProducts() {
+
+    @Override
+    public List<Product> getAllProductsWithFilterApplied() {
         return productRepository.getAllProducts();
     }
 }

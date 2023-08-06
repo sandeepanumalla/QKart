@@ -8,8 +8,10 @@ import com.example.qkart.repository.SessionProvider;
 import com.example.qkart.repository.UserRepository;
 import com.example.qkart.service.IUserService;
 import com.example.qkart.service.UserService;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validation;
 import org.hibernate.SessionFactory;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -38,7 +40,7 @@ public class UserServiceTest {
     public void shouldUserAbleToRegister() {
         try {
             User user = User.builder()
-                    .kart(null)
+                    .cart(null)
                     .dateCreated(new Date())
                     .firstName("Sandeep")
                     .username("sanumalla2")
@@ -52,6 +54,21 @@ public class UserServiceTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    @Test
+    public void shouldThrowValidationErrorIfEmptyFields() {
+        User user = User.builder()
+                .cart(null)
+                .dateCreated(new Date())
+                .firstName("Sandeep")
+                .username("sanumakla")
+                .build();
+
+        UserRegisterRequest userRegisterRequest = modelMapper.map(user, UserRegisterRequest.class);
+
+        Assertions.assertThrows(ConstraintViolationException.class, () -> userService.register(userRegisterRequest));
     }
 
     @Test
@@ -68,5 +85,4 @@ public class UserServiceTest {
 
         assertThrows(Exception.class, () -> userService.login(loginRequest));
     }
-
 }

@@ -28,8 +28,9 @@ public class User {
     @Temporal(TemporalType.DATE)
     private Date dateCreated;
 
-    @OneToOne(mappedBy = "id.user")
-    private Kart kart;
+    @OneToOne
+    @JoinColumn(name = "kart_id")
+    private Cart cart;
 
     @OneToMany(mappedBy = "user")
     private List<Orders> orderList;

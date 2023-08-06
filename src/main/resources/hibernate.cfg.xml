@@ -19,8 +19,8 @@
         <mapping class="com.example.qkart.model.Product"/>
         <mapping class="com.example.qkart.model.User"/>
         <mapping class="com.example.qkart.model.Category"/>
-        <mapping class="com.example.qkart.model.Kart"/>
-
+        <mapping class="com.example.qkart.model.Cart"/>
+        <mapping class="com.example.qkart.model.CartItems" />
     </session-factory>
 
 </hibernate-configuration>

@@ -23,7 +23,7 @@ public class UserRepository implements IUserRepository{
         this.session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 //        User user = User.builder()
-//                .kart(null)
+//                .cart(null)
 //                .dateCreated(new Date())
 //                .firstName("Sandeep")
 //                .lastName("Anumalla")
@@ -59,5 +59,4 @@ public class UserRepository implements IUserRepository{
         this.session.getTransaction().commit();
         return user;
     }
-
 }

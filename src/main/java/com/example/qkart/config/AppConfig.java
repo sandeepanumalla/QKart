@@ -4,7 +4,6 @@ import com.example.qkart.repository.*;
 import com.example.qkart.service.*;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.modelmapper.ModelMapper;
 
@@ -25,7 +24,8 @@ public class AppConfig {
 
     public IUserService userService = new UserService(userRepository, modelMapper, validator);
 
-    public IKartRepository kartRepository = new KartRepository(sessionFactory);
+    public ICartRepository kartRepository = new CartRepository(sessionFactory);
 
-    public IKartService kartService = new KartService(kartRepository, userRepository);
+    private ICartItemsRepository cartItemsRepository;
+    public IKartService kartService = new KartService(kartRepository, userRepository, cartItemsRepository, productRepository);
 }

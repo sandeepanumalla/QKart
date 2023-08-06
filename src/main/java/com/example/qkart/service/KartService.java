@@ -1,42 +1,40 @@
 package com.example.qkart.service;
 
-import com.example.qkart.model.Kart;
+import com.example.qkart.model.Cart;
+import com.example.qkart.model.CartItems;
 import com.example.qkart.model.Product;
-import com.example.qkart.model.User;
-import com.example.qkart.repository.IKartRepository;
+import com.example.qkart.repository.ICartItemsRepository;
+import com.example.qkart.repository.ICartRepository;
+import com.example.qkart.repository.IProductRepository;
 import com.example.qkart.repository.IUserRepository;
-import com.example.qkart.repository.KartRepository;
 
 
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class KartService implements IKartService{
 
-    private final IKartRepository kartRepository;
+    private final ICartRepository cartRepository;
     private final IUserRepository userRepository;
 
-    public KartService(IKartRepository kartRepository, IUserRepository userRepository) {
-        this.kartRepository = kartRepository;
+    private final ICartItemsRepository cartItemsRepository;
+
+    private final IProductRepository productRepository;
+
+    public KartService(ICartRepository cartRepository, IUserRepository userRepository, ICartItemsRepository cartItemsRepository, IProductRepository productRepository) {
+        this.cartRepository = cartRepository;
         this.userRepository = userRepository;
+        this.cartItemsRepository = cartItemsRepository;
+        this.productRepository = productRepository;
     }
 
-//    @Override
-//    public List<Kart> getKartItemsForUser(AddItemsRequest addItemsRequest) {
-//
-//        List<Kart> kartList = kartRepository.getProductsByUserId(addItemsRequest.userId);
-//
-////        kartList.stream().forEach(e ->{});
-//
-//        return null;
-//    }
 
     @Override
     public void addItemToCart(int userId, Map<Product, Integer> productsWithQuantities) {
         if(productsWithQuantities == null || productsWithQuantities.isEmpty()) {
             throw new IllegalArgumentException("Invalid products with quantities to add.");
         }
-        List<Kart> kart = kartRepository.getProductsByUserId(userId);
+        List<Cart> cart = cartRepository.getProductsByUserId(userId);
 
         for(Map.Entry<Product, Integer> entry: productsWithQuantities.entrySet()) {
             Product product = entry.getKey();
@@ -47,19 +45,19 @@ public class KartService implements IKartService{
             }
 
 //            User user = userRepository.findById(userId);
-//            Kart.KartProductKey kartProductKey = new Kart.KartProductKey(user, product);
-//            Kart existingKartItem = kartRepository.findById(kartProductKey);
+//            Cart.KartProductKey kartProductKey = new Cart.KartProductKey(user, product);
+//            Cart existingKartItem = cartRepository.findById(kartProductKey);
 
 //            if(existingKartItem != null) {
 //                int currentQuantity = existingKartItem.getQuantity();
 //                existingKartItem.setQuantity(currentQuantity + quantityToAdd);
-//                kartRepository.update(existingKartItem);
+//                cartRepository.update(existingKartItem);
 //            } else {
-//                Kart newKartItem = Kart.builder()
+//                Cart newKartItem = Cart.builder()
 //                        .id(kartProductKey)
 //                        .quantity(quantityToAdd)
 //                        .build();
-//                kartRepository.save(newKartItem);
+//                cartRepository.save(newKartItem);
 //            }
 
         }
@@ -71,8 +69,36 @@ public class KartService implements IKartService{
     }
 
     @Override
-    public void removeProduct(String productId) {
+    public List<CartItems> getCartItems(int cartId) {
+        return null;
+    }
 
+    @Override
+    public void addCartItem(int cartId, int productId, int newQuantity) {
+        List<CartItems> cartItemsList = getCartItems(cartId);
+
+        Optional<CartItems> cartItemsOptional = cartItemsList.stream().filter(cartItem -> cartItem.getProduct().getProductId() == productId).findAny();
+        Cart cart = cartRepository.findById(cartId);
+        Product product = productRepository.getProductById(productId).orElseThrow(() -> new IllegalArgumentException("no product found with productId" + productId));
+        boolean productExists = cartItemsOptional.isPresent();
+        CartItems cartItem;
+        if(productExists) {
+             cartItem =  cartItemsOptional.get();
+                cartItem.setQuantity(newQuantity);
+        } else {
+             cartItem = CartItems.builder()
+                    .cart(cart)
+                    .quantity(newQuantity)
+                    .product(product)
+                    .build();
+        }
+        cartItemsRepository.saveCartItem(cartItem);
+    }
+
+
+    @Override
+    public void removeProduct(int cartItemsId) {
+        cartItemsRepository.removeById(cartItemsId);
     }
 
     @Override

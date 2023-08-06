@@ -31,7 +31,7 @@ public class UserRepositoryTest {
     @Test
     public void saveTest() {
         User user = User.builder()
-                .kart(null)
+                .cart(null)
                 .dateCreated(new Date())
                 .firstName("Sandeep")
                 .username("sanumalla")
@@ -45,7 +45,7 @@ public class UserRepositoryTest {
     @Test
     public void saveTestShouldThrowUniqueConstraintViolatonException() {
         User user = User.builder()
-                .kart(null)
+                .cart(null)
                 .dateCreated(new Date())
                 .firstName("Sandeep")
                 .username("sanumalla")
@@ -61,7 +61,7 @@ public class UserRepositoryTest {
     public void findUserByUsernameTest() {
         String username = "sanumalla";
         User user = User.builder()
-                .kart(null)
+                .cart(null)
                 .dateCreated(new Date())
                 .firstName("Sandeep")
                 .username("sanumalla")

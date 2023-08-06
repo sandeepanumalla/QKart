@@ -8,5 +8,8 @@ public interface IOrderRepository {
 
     List<Orders> getAllOrders();
 
+    void removeOrder(int orderId);
+
+
 
 }

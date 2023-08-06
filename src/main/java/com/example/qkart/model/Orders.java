@@ -22,7 +22,7 @@ public class Orders {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @Transient
+
     private int quantity;
 
     private double price;

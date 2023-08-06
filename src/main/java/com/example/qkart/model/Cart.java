@@ -3,8 +3,7 @@ package com.example.qkart.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
-
+import java.util.List;
 
 @Entity
 @Builder
@@ -12,21 +11,16 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "kart")
-public class Kart {
+@Table(name = "cart")
+public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int quantity;
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-
+    @OneToMany(mappedBy = "cart")
+    private List<CartItems> cartItems;
 }

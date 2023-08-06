@@ -29,8 +29,5 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "id.product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Kart> karts;
-
 }
 

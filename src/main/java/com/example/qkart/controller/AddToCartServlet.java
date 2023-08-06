@@ -3,7 +3,7 @@ package com.example.qkart.controller;
 import com.example.qkart.config.AppConfig;
 import com.example.qkart.model.Product;
 import com.example.qkart.model.User;
-import com.example.qkart.repository.IKartRepository;
+import com.example.qkart.repository.ICartRepository;
 import com.example.qkart.repository.IProductRepository;
 import com.example.qkart.repository.IUserRepository;
 import com.example.qkart.service.IKartService;
@@ -26,7 +26,7 @@ public class AddToCartServlet extends HttpServlet {
 
     private IKartService kartService;
 
-    private IKartRepository kartRepository;
+    private ICartRepository kartRepository;
     private IUserRepository userRepository;
 
 //    private
