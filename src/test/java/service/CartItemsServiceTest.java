@@ -110,7 +110,7 @@ class CartItemsServiceTest {
     @Test
     void testAddCartItem_NewProduct_Mocked() throws Exception {
         int cartId = 1;
-        int productId = 2;
+        int productId = 3;
         int newQuantity = 5;
 
         Cart cart = new Cart();

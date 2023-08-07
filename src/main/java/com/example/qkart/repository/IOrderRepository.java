@@ -6,7 +6,7 @@ import java.util.List;
 public interface IOrderRepository {
     void save(Orders order);
 
-    List<Orders> getAllOrders();
+    List<Orders> getAllOrders(int userId);
 
     void removeOrder(int orderId);
 

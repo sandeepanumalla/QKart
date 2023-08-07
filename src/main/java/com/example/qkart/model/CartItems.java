@@ -2,6 +2,7 @@ package com.example.qkart.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +26,4 @@ public class CartItems {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @OneToMany(mappedBy = "cartItem")
-    private Orders order;
 }

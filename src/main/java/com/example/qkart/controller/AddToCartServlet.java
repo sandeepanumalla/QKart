@@ -45,12 +45,16 @@ public class AddToCartServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String productId = req.getParameter("productId");
-//        String quantity = req.getParameter("quantity");
-//        String username = req.getParameter("username");
-//
-//        Optional<Product> product = productRepository.getProductById(Integer.parseInt(productId));
-//
+
+        String productId = req.getParameter("productId");
+        String quantity = req.getParameter("quantity");
+        String username = req.getParameter("username");
+
+        String action = req.getContextPath();
+
+
+        Optional<Product> product = productRepository.getProductById(Integer.parseInt(productId));
+
 //        Product product1 = product.orElseThrow(() -> new IllegalArgumentException(""));
 //
 //        Map<Product, Integer> productIntegerMap = new HashMap<>();
@@ -61,9 +65,9 @@ public class AddToCartServlet extends HttpServlet {
 //        User user1 = user.orElseThrow(() -> new IllegalArgumentException(""));
 //        int userIdInt = user1.getUserId();
 //        cartService.( userIdInt, productIntegerMap);
+    }
 
-
-
+    void addItemToCart() {
 
     }
 

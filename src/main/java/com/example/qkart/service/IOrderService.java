@@ -14,7 +14,7 @@ public interface IOrderService {
 
     void createOrderWithSingleCartItem(CartItems cartItems);
 
-    List<Orders> getOrdersByUser();
+    List<Orders> getOrdersByUser(int userId);
 
     void cancelOrderById(int orderId);
 }

@@ -18,26 +18,22 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
 
-//    private String name;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "category_id")
-//    private Category category;
-//
-//
-//    private int quantity;
-//
-//    private double price;
+    private String name;
 
     @ManyToOne
-    @JoinColumn(name = "cartItem_id")
-    private CartItems cartItem;
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+
+    private int quantity;
+
+    private double price;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Temporal(TemporalType.DATE)
-    private Date orderDate;
 
+    @Temporal(TemporalType.DATE)
+    private Date createdDate;
 }

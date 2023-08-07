@@ -4,6 +4,7 @@ import com.example.qkart.model.CartItems;
 import com.example.qkart.model.Orders;
 import com.example.qkart.repository.IOrderRepository;
 
+import java.util.Date;
 import java.util.List;
 
 public class OrderService implements IOrderService{
@@ -22,7 +23,6 @@ public class OrderService implements IOrderService{
     public void createOrderWithCartCheckout(List<CartItems> cartItemsList) {
 
         // make an order
-        Orders orders = Orders.builder().build();;
         for(CartItems cartItems: cartItemsList) {
             createOrderWithSingleCartItem(cartItems);
         }
@@ -34,18 +34,26 @@ public class OrderService implements IOrderService{
     public void createOrderWhenCartItemsDontExist(int cartId, int productId) throws Exception {
         //crate cartItem
         cartItemsService.addCartItem(cartId, productId, 1);
+
         //make an order
         CartItems cartItem = cartItemsService.getCartItemByProductId(productId);
         createOrderWithSingleCartItem(cartItem);
 
         //remove the cartItem
-        cartItemsService.removeProduct(cartItem.getId());
     }
 
     @Override
     public void createOrderWithSingleCartItem(CartItems cartItems) {
         //make an order
-        Orders orders = Orders.builder().build();
+        Orders orders = Orders.builder()
+                .name(cartItems.getProduct().getName())
+                .quantity(cartItems.getQuantity())
+                .price(cartItems.getQuantity() * cartItems.getProduct().getPrice())
+                .category(cartItems.getProduct().getCategory())
+                .user(cartItems.getCart().getUser())
+                .createdDate(new Date())
+                .build();
+
         orderRepository.save(orders);
 
         //remove the cartItem
@@ -53,12 +61,12 @@ public class OrderService implements IOrderService{
     }
 
     @Override
-    public List<Orders> getOrdersByUser() {
-        return null;
+    public List<Orders> getOrdersByUser(int userId) {
+       return orderRepository.getAllOrders(userId);
     }
 
     @Override
     public void cancelOrderById(int orderId) {
-
+        orderRepository.removeOrder(orderId);
     }
 }
