@@ -18,4 +18,5 @@ public interface ICartRepository {
     int getTotalPrice(int cartId);
 
     int getCartSize(int cartId);
+
 }

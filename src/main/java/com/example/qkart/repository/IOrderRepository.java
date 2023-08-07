@@ -10,6 +10,4 @@ public interface IOrderRepository {
 
     void removeOrder(int orderId);
 
-
-
 }

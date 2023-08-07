@@ -24,4 +24,7 @@ public class CartItems {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @OneToMany(mappedBy = "cartItem")
+    private Orders order;
 }

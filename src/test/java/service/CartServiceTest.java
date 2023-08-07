@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.example.qkart.repository.*;
-import com.example.qkart.service.KartService;
+import com.example.qkart.service.CartService;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ public class CartServiceTest {
 
     private ProductRepository productRepository;
 
-    private KartService kartService;
+    private CartService kartService;
 
     private ICartItemsRepository cartItemsRepository;
 
@@ -38,7 +38,7 @@ public class CartServiceTest {
         kartRepository = new CartRepository(sessionFactory);
         userRepository = new UserRepository(sessionFactory);
         productRepository = new ProductRepository(sessionFactory);
-        kartService = new KartService(kartRepository, userRepository, cartItemsRepository, productRepository);
+        kartService = new CartService(kartRepository, userRepository, cartItemsRepository, productRepository);
     }
 
     @Test

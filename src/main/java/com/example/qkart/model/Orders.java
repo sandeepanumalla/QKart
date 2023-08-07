@@ -3,6 +3,8 @@ package com.example.qkart.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
+
 @Entity
 @Builder
 @Getter
@@ -16,27 +18,26 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
 
-    private String name;
+//    private String name;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "category_id")
+//    private Category category;
+//
+//
+//    private int quantity;
+//
+//    private double price;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-
-
-    private int quantity;
-
-    private double price;
+    @JoinColumn(name = "cartItem_id")
+    private CartItems cartItem;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+    @Temporal(TemporalType.DATE)
+    private Date orderDate;
 
 }

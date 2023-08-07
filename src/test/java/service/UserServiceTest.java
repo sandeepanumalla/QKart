@@ -2,10 +2,9 @@ package service;
 
 import com.example.qkart.dao.UserLoginRequest;
 import com.example.qkart.dao.UserRegisterRequest;
+import com.example.qkart.model.Cart;
 import com.example.qkart.model.User;
-import com.example.qkart.repository.IUserRepository;
-import com.example.qkart.repository.SessionProvider;
-import com.example.qkart.repository.UserRepository;
+import com.example.qkart.repository.*;
 import com.example.qkart.service.IUserService;
 import com.example.qkart.service.UserService;
 import jakarta.validation.ConstraintViolationException;
@@ -28,29 +27,35 @@ public class UserServiceTest {
     private SessionFactory sessionFactory;
     private ModelMapper modelMapper;
 
+    private ICartRepository cartRepository;
+
     @BeforeEach
     void setup() {
         this.sessionFactory = SessionProvider.getSessionFactory();
         this.userRepository = new UserRepository(sessionFactory);
         this.modelMapper = new ModelMapper();
-        userService = new UserService(userRepository, modelMapper, Validation.buildDefaultValidatorFactory().getValidator());
+        this.cartRepository = new CartRepository(sessionFactory);
+        userService = new UserService(userRepository, cartRepository, modelMapper, Validation.buildDefaultValidatorFactory().getValidator());
     }
 
     @Test
     public void shouldUserAbleToRegister() {
         try {
+            Cart cart = Cart.builder()
+                    .build();
+
             User user = User.builder()
-                    .cart(null)
+                    .cart(cart)
                     .dateCreated(new Date())
                     .firstName("Sandeep")
                     .username("sanumalla2")
                     .password("Test123")
                     .build();
 
+            cart.setUser(user);
+
             UserRegisterRequest userRegisterRequest = modelMapper.map(user, UserRegisterRequest.class);
-
             userService.register(userRegisterRequest);
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -73,14 +78,12 @@ public class UserServiceTest {
 
     @Test
     public void testSuccessfulLogin() {
-
         UserLoginRequest loginRequest = new UserLoginRequest("sanumalla2", "Test123");
         assertDoesNotThrow(() -> userService.login(loginRequest));
     }
 
     @Test
     public void testLoginWithIncorrectPassword() {
-        // Mock UserLoginRequest with valid data
         UserLoginRequest loginRequest = new UserLoginRequest("valid_username", "incorrect_password");
 
         assertThrows(Exception.class, () -> userService.login(loginRequest));

@@ -25,6 +25,4 @@ public class CategoryRepository implements ICategoryRepository{
           session.getTransaction().commit();
         }
     }
-
-
 }

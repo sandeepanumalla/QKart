@@ -44,7 +44,6 @@ public class LoginServlet extends HttpServlet {
             resp.sendRedirect("Products.jsp");
         } catch (Exception e) {
             resp.sendRedirect(req.getContextPath() + "/Login.jsp?error=1");
-//            throw new RuntimeException(e);
         }
     }
 }

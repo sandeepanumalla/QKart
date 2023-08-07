@@ -22,10 +22,12 @@ public class AppConfig {
 
     public IUserRepository userRepository = new UserRepository(sessionFactory);
 
-    public IUserService userService = new UserService(userRepository, modelMapper, validator);
+    public ICartRepository cartRepository = new CartRepository(sessionFactory);
 
-    public ICartRepository kartRepository = new CartRepository(sessionFactory);
+    public IUserService userService = new UserService(userRepository, cartRepository, modelMapper, validator);
+
 
     private ICartItemsRepository cartItemsRepository;
-    public IKartService kartService = new KartService(kartRepository, userRepository, cartItemsRepository, productRepository);
+
+    public ICartService kartService = new CartService(cartRepository, userRepository, cartItemsRepository, productRepository);
 }

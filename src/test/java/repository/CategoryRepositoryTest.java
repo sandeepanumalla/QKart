@@ -37,8 +37,6 @@ public class CategoryRepositoryTest {
             categoryRepository.save(categoryName3);
             categoryRepository.save(categoryName4);
 
-            // Then
-//            Assertions.assertEquals();
         }
     }
 
