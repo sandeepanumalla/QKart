@@ -16,18 +16,20 @@ public class AppConfig {
 
     public ModelMapper modelMapper= new ModelMapper();
 
-    public IProductRepository productRepository = new ProductRepository(sessionFactory);
 
-    public ProductsService productsService = new ProductsService(productRepository);
+    public IProductRepository productRepository = new ProductRepository(sessionFactory);
 
     public IUserRepository userRepository = new UserRepository(sessionFactory);
 
     public ICartRepository cartRepository = new CartRepository(sessionFactory);
 
+    public ProductsService productsService = new ProductsService(productRepository);
+
+    private final ICartItemsRepository cartItemsRepository = new CartItemsRepository(sessionFactory);
+
     public IUserService userService = new UserService(userRepository, cartRepository, modelMapper, validator);
 
+    public ICartService cartService = new CartService(cartRepository, userRepository, cartItemsRepository, productRepository);
 
-    private ICartItemsRepository cartItemsRepository;
-
-    public ICartService kartService = new CartService(cartRepository, userRepository, cartItemsRepository, productRepository);
+    public ICartItemsService cartItemsService = new CartItemsService(cartRepository, cartItemsRepository, productRepository);
 }

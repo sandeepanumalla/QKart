@@ -43,8 +43,8 @@ public void listProducts(HttpServletRequest request, HttpServletResponse respons
     try {
         List<Product> productList = appConfig.productsService.getAllProductsWithFilterApplied();
         request.setAttribute("productList" , productList);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/products");
-        requestDispatcher.forward(request, response);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/products.jsp");
+        requestDispatcher.include(request, response);
     } catch (ServletException | IOException e) {
         throw new RuntimeException(e);
     }

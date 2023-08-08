@@ -84,13 +84,14 @@
         <c:forEach items="${productList}" var="p">
             <div class="col-md-6 col-lg-3 product-card mt-auto">
                 <div class="card h-100">
-                    <img src="product_image.jpg" class="card-img-top" alt="Product Image">
+                    <img src="<c:out value="${p.imageURL}"></c:out>" class="card-img-top" alt="Product Image">
                     <div class="card-body text-center">
                         <h3 class="card-title"><c:out value="${p.name}"></c:out></h3>
                         <p class="card-text">Price: $ <c:out value="${p.price}"></c:out></p>
                         <p class="catd-text">Category: null</p>
                         <div class="d-flex justify-content-between">
                             <form action="<%=request.getContextPath()%>/api/protected/addToCart" method="post">
+                                <input type="hidden" name="username" value="<c:out value="${requestScope.username}"></c:out>">
                                 <input type="hidden" name="productId" value="<c:out value="${p.productId}"></c:out>">
                                 <input type="hidden" name="quantity" value=1>
                                 <button type="submit" class="btn btn-dark">Add to Cart</button>

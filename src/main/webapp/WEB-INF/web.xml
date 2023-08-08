@@ -4,7 +4,7 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
     <servlet>
-        <servlet-name>Products</servlet-name>
+        <servlet-name>ProductsServlet</servlet-name>
         <servlet-class>com.example.qkart.controller.ProductsServlet</servlet-class>
     </servlet>
 
@@ -23,6 +23,8 @@
         <servlet-class>com.example.qkart.controller.AddToCartServlet</servlet-class>
     </servlet>
 
+
+
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/api/login</url-pattern>
@@ -34,10 +36,9 @@
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>Products</servlet-name>
+        <servlet-name>ProductsServlet</servlet-name>
         <url-pattern>/products</url-pattern>
     </servlet-mapping>
-
 
     <servlet-mapping>
         <servlet-name>AddToCart</servlet-name>
