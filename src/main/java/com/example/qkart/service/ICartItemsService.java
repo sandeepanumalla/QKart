@@ -8,7 +8,7 @@ public interface ICartItemsService {
 
     void addCartItem(int cartId, int productId, int newQuantity) throws Exception;
 
-    public void removeProduct(int cartItemsId);
+    public void removeProduct(int cartId, int productId);
 
     public int getCartSize(int cartId) throws Exception;
 

@@ -57,16 +57,25 @@
             <tbody>
             <c:forEach items="${sessionScope.cartItemsList}" var="ci">
                 <tr>
-                    <td><c:out value="${ci.name}"></c:out></td>
-                    <td><c:out value="${ci.category}"></c:out></td>
-                    <td>$<c:out value="${ci.price}"></c:out></td>
+                    <td><c:out value="${ci.product.name}"></c:out></td>
+                    <td><c:out value="${ci.product.category}"></c:out></td>
+                    <td>$<c:out value="${ci.product.price}"></c:out></td>
                     <td>
-                        <button class="btn btn-secondary btn-sm">-</button>
-                        <span class="mx-2"><c:out value="${ci.quantity}"></c:out></span>
-                        <button class="btn btn-secondary btn-sm">+</button>
+                        <form method="post" action="${pageContext.request.contextPath}/api/protected/decrease-items">
+                            <input type="hidden" name="productId" value="<c:out value="${ci.product.productId}"></c:out>">
+                            <input type="hidden" name="quantity" value="<c:out value="${ci.quantity}"></c:out>">
+                            <button class="btn btn-secondary btn-sm decrease-quantity">-</button>
+                        </form>
+                        <span class="mx-2 quantity"><c:out value="${ci.quantity}"></c:out></span>
+                        <form action="${pageContext.request.contextPath}/api/protected/increase-items" method="post">
+                            <input type="hidden" name="productId" value="<c:out value="${ci.product.productId}"></c:out>">
+                            <input type="hidden" name="quantity" value="<c:out value="${ci.quantity}"></c:out>">
+                            <button class="btn btn-secondary btn-sm increase-quantity">+</button>
+                        </form>
+
                     </td>
                     <td>
-                        <button class="btn btn-danger btn-sm">Cancel</button>
+                        <button class="btn btn-danger btn-sm">Remove</button>
                     </td>
                 </tr>
             </c:forEach>
@@ -75,10 +84,37 @@
         </table>
     </div>
     <div class="text-end">
-        <h4>Total Price: $10.00</h4>
+        <h4>Total Price: $<c:out value="${sessionScope.totalCartPrice}"></c:out></h4>
         <button class="btn btn-primary">Checkout</button>
     </div>
 </div>
-
+<script>
+    // console.log("is it working" )
+    // const quantityElements = document.querySelectorAll(".quantity");
+    // const increaseButtons = document.querySelectorAll(".increase-quantity");
+    // const decreaseButton = document.querySelectorAll(".decrease-quantity");
+    //
+    // for (let i = 0; i < increaseButtons.length; i++) {
+    //     increaseButtons[i].addEventListener('click', () => {
+    //         let currentQuantity = parseInt(quantityElements[i].textContent);
+    //
+    //         currentQuantity++;
+    //
+    //         quantityElements[i].textContent = currentQuantity.toString();
+    //     });
+    // }
+    //
+    // for (let i = 0; i < decreaseButton.length; i++) {
+    //     decreaseButton[i].addEventListener('click', () => {
+    //         let currentQuantity = parseInt(quantityElements[i].textContent);
+    //
+    //         if (currentQuantity > 1) {
+    //             currentQuantity--;
+    //
+    //             quantityElements[i].textContent = currentQuantity.toString();
+    //         }
+    //     });
+    // }
+</script>
 </body>
 </html>

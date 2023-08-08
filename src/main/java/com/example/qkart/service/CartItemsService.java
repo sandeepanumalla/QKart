@@ -26,8 +26,8 @@ public class CartItemsService implements ICartItemsService{
 
 
     @Override
-    public void removeProduct(int cartItemsId) {
-        cartItemsRepository.removeById(cartItemsId);
+    public void removeProduct(int cartId, int productId) {
+        cartItemsRepository.removeById(cartId, productId);
     }
 
     @Override
@@ -66,7 +66,10 @@ public class CartItemsService implements ICartItemsService{
         boolean productExists = cartItemsOptional.isPresent();
         CartItems cartItem;
         if(productExists) {
-             cartItem =  cartItemsOptional.get();
+             cartItem = cartItemsOptional.get();
+             if(newQuantity < 0) {
+                 return;
+             }
                 cartItem.setQuantity(newQuantity);
         } else {
              cartItem = CartItems.builder()

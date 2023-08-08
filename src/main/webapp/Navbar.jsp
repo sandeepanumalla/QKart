@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/Home.jsp">Home</a>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/home">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<%=request.getContextPath()%>/products">Products</a>
@@ -51,7 +51,7 @@
                         </c:choose>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/api/protected/cart-items">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                             <path d="M0 1.053A.053.053 0 0 1 .053 1h1.397l1.007 7.051A2 2 0 0 0 4.441 10H14a1 1 0 0 1 1 1 1 1 0 0 1-1 1H4.441a2 2 0 1 0-1.964 1.549l-.504 3.529A.5.5 0 0 1 2 16h12a.5.5 0 0 1 .481.374l1 4A.5.5 0 0 1 15 21H1a.5.5 0 0 1-.481-.626l1-4A.5.5 0 0 1 2 16h1.344a2.5 2.5 0 0 1 4.908 0h3.296a2.5 2.5 0 0 1 4.908 0H16a1 1 0 0 1-1-1 1 1 0 0 1 1-1h1a.053.053 0 0 1 .053.053V1.053A.053.053 0 0 1 16 1h-4.952a2.5 2.5 0 1 1-4.096 0H0a.053.053 0 0 1 .053.053z"/>
                         </svg>

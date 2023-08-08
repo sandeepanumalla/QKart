@@ -22,13 +22,14 @@ public class CartItemsRepository implements ICartItemsRepository{
 
 
     @Override
-    public void removeById(int cartItemsId) {
+    public void removeById(int cartId, int productId) {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            CartItems cartItem = session.get(CartItems.class, cartItemsId); // Fetch the entity by ID
-            if (cartItem != null) {
-                session.remove(cartItem); // Remove the entity
-            }
+            String query = "DELETE from CartItems ci where ci.cart.id = :cartId and ci.product.id = :productId";
+            Query<?> sessionQuery= session.createQuery(query);
+            sessionQuery.setParameter("cartId", cartId);
+            sessionQuery.setParameter("productId", productId);
+            sessionQuery.executeUpdate();
             session.getTransaction().commit();
         }
     }

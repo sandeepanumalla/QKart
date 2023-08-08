@@ -57,7 +57,7 @@ public class OrderService implements IOrderService{
         orderRepository.save(orders);
 
         //remove the cartItem
-        cartItemsService.removeProduct(cartItems.getId());
+        cartItemsService.removeProduct(cartItems.getId(), cartItems.getProduct().getProductId());
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ICartItemsRepository {
 
-    void removeById(int cartItemsId);
+    void removeById(int cartId, int productId);
 
     void saveCartItem(CartItems cartItems);
 

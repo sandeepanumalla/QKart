@@ -133,8 +133,8 @@ class CartItemsServiceTest {
     @Test
     void testAddCartItem_ExistingCartItems() throws Exception {
         int cartId = 1;
-        int productId = 1;
-        int newQuantity = 7;
+        int productId = 11;
+        int newQuantity = -7;
 
         Cart cart = new Cart();
         Product existingProduct = new Product();
@@ -168,24 +168,27 @@ class CartItemsServiceTest {
     @Test
     void shouldRemoveProductMocked() {
 
-        int cartItemsId = 1;
+        int productId = 11;
 
-        cartItemsService.removeProduct(cartItemsId);
+        int cartItem = 1;
+        cartItemsService.removeProduct(cartItem, productId);
 
-        verify(cartItemsRepository).removeById(cartItemsId);
+        verify(cartItemsRepository).removeById(cartItem, productId);
     }
 
     @Test
     void shouldRemoveProduct() {
-        int cartItemId=2;
+        int productId = 3;
 
-        unMockedCartItemsService.removeProduct(cartItemId);
+        int cartId = 1;
+        unMockedCartItemsService.removeProduct(cartId, productId);
 
     }
 
     @Test
     void shouldGetTotalCartSize() throws Exception {
         int cartId = 1;
+
 
         int size = unMockedCartItemsService.getCartSize(cartId);
 
