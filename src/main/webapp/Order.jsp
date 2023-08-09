@@ -1,4 +1,5 @@
-<%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.example.qkart.config.AppConfig" %><%--
   Created by IntelliJ IDEA.
   User: anuma
   Date: 29-07-2023
@@ -17,6 +18,7 @@
 </head>
 <body>
 <jsp:include page="Navbar.jsp"/>
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -36,23 +38,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>12345</td>
-                                <td>2023-07-30</td>
-                                <td>Product 1</td>
-                                <td>2</td>
-                                <td>$50</td>
-                                <td><button class="btn btn-danger btn-sm">Cancel</button></td>
-                            </tr>
-                            <tr>
-                                <td>67890</td>
-                                <td>2023-07-31</td>
-                                <td>Product 2</td>
-                                <td>1</td>
-                                <td>$30</td>
-                                <td><button class="btn btn-danger btn-sm">Cancel</button></td>
-                            </tr>
-                            <!-- Add more order rows here -->
+                            <c:forEach var="o" items="${sessionScope.ordersList}" >
+                                <tr>
+                                    <td><c:out value="${o.orderId}"></c:out></td>
+                                    <td><c:out value="${o.createdDate}"></c:out></td>
+                                    <td><c:out value="${o.name}"></c:out></td>
+                                    <td><c:out value="${o.quantity}"></c:out></td>
+                                    <td><c:out value="${o.price}"></c:out></td>
+                                    <td><button class="btn btn-danger btn-sm">Cancel</button></td>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>

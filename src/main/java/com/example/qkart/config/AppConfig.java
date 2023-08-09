@@ -23,6 +23,7 @@ public class AppConfig {
 
     public ICartRepository cartRepository = new CartRepository(sessionFactory);
 
+    public IOrderRepository orderRepository = new OrderRepository(sessionFactory);
     public ProductsService productsService = new ProductsService(productRepository);
 
     private final ICartItemsRepository cartItemsRepository = new CartItemsRepository(sessionFactory);
@@ -32,4 +33,6 @@ public class AppConfig {
     public ICartService cartService = new CartService(cartRepository, userRepository, cartItemsRepository, productRepository);
 
     public ICartItemsService cartItemsService = new CartItemsService(cartRepository, cartItemsRepository, productRepository);
+
+    public IOrderService orderService = new OrderService(orderRepository, cartItemsService);
 }

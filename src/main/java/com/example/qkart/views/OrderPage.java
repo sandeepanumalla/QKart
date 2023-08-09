@@ -1,5 +1,7 @@
 package com.example.qkart.views;
 
+import com.example.qkart.controller.OrdersServlet;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +13,13 @@ import java.io.IOException;
 @WebServlet("/orders")
 public class OrderPage extends HttpServlet {
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/Order.jsp");
         requestDispatcher.forward(req, resp);
     }

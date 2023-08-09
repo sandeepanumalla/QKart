@@ -75,7 +75,9 @@
 
                     </td>
                     <td>
-                        <button class="btn btn-danger btn-sm">Remove</button>
+                        <form method="delete" action="${pageContext.request.contextPath}/api/protected/decrease-items">
+                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                        </form>
                     </td>
                 </tr>
             </c:forEach>
@@ -85,7 +87,10 @@
     </div>
     <div class="text-end">
         <h4>Total Price: $<c:out value="${sessionScope.totalCartPrice}"></c:out></h4>
-        <button class="btn btn-primary">Checkout</button>
+        <form method="post" action="${pageContext.request.contextPath}/api/protected/checkout-all">
+            <button type="submit" class="btn btn-primary">Checkout</button>
+        </form>
+
     </div>
 </div>
 <script>
