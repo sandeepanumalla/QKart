@@ -48,7 +48,8 @@ public class CartItemsServlet extends HttpServlet {
             double totalCartPrice = cartItemsService.getTotalCartPrice(cartId);
             httpSession.setAttribute("cartItemsList", cartItemsList);
             httpSession.setAttribute("totalCartPrice", totalCartPrice);
-            resp.sendRedirect(req.getContextPath() + "/cart");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/cart");
+            requestDispatcher.forward(req, resp);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

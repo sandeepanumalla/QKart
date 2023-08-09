@@ -35,64 +35,76 @@
 <body>
 <jsp:include page="Navbar.jsp"/>
 
-<c:if test="${sessionScope.username == null}">
-    <div>
-        <jsp:include page="login-required.jsp"/>
-    </div>
-</c:if>
+<c:choose>
+    <c:when test="${sessionScope.username == null}">
+        <div>
+            <jsp:include page="login-required.jsp"/>
+        </div>
+    </c:when>
+    <c:when test="${sessionScope.cartItemsList.size() == 0}">
+        <div class="container mt-4">
+            <h2>You have no items in Cart</h2>
+        </div>
+    </c:when>
+    <c:otherwise>
+        <div class="container mt-4">
+            <h2>Your Cart</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${sessionScope.cartItemsList}" var="ci">
+                        <tr>
+                            <td><c:out value="${ci.product.name}"></c:out></td>
+                            <td><c:out value="${ci.product.category}"></c:out></td>
+                            <td>$<c:out value="${ci.product.price}"></c:out></td>
+                            <td>
+                                <form method="post" action="${pageContext.request.contextPath}/api/protected/decrease-items">
+                                    <input type="hidden" name="productId" value="<c:out value="${ci.product.productId}"></c:out>">
+                                    <input type="hidden" name="quantity" value="<c:out value="${ci.quantity}"></c:out>">
+                                    <button class="btn btn-secondary btn-sm decrease-quantity">-</button>
+                                </form>
+                                <span class="mx-2 quantity"><c:out value="${ci.quantity}"></c:out></span>
+                                <form action="${pageContext.request.contextPath}/api/protected/increase-items" method="post">
+                                    <input type="hidden" name="productId" value="<c:out value="${ci.product.productId}"></c:out>">
+                                    <input type="hidden" name="quantity" value="<c:out value="${ci.quantity}"></c:out>">
+                                    <button class="btn btn-secondary btn-sm increase-quantity">+</button>
+                                </form>
 
-<div class="container mt-4">
-    <h2>Your Cart</h2>
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${sessionScope.cartItemsList}" var="ci">
-                <tr>
-                    <td><c:out value="${ci.product.name}"></c:out></td>
-                    <td><c:out value="${ci.product.category}"></c:out></td>
-                    <td>$<c:out value="${ci.product.price}"></c:out></td>
-                    <td>
-                        <form method="post" action="${pageContext.request.contextPath}/api/protected/decrease-items">
-                            <input type="hidden" name="productId" value="<c:out value="${ci.product.productId}"></c:out>">
-                            <input type="hidden" name="quantity" value="<c:out value="${ci.quantity}"></c:out>">
-                            <button class="btn btn-secondary btn-sm decrease-quantity">-</button>
-                        </form>
-                        <span class="mx-2 quantity"><c:out value="${ci.quantity}"></c:out></span>
-                        <form action="${pageContext.request.contextPath}/api/protected/increase-items" method="post">
-                            <input type="hidden" name="productId" value="<c:out value="${ci.product.productId}"></c:out>">
-                            <input type="hidden" name="quantity" value="<c:out value="${ci.quantity}"></c:out>">
-                            <button class="btn btn-secondary btn-sm increase-quantity">+</button>
-                        </form>
+                            </td>
+                            <td>
+                                <form method="post" action="${pageContext.request.contextPath}/api/protected/cart-items/remove">
+                                    <input type="hidden" name="productId" value="<c:out value="${ci.product.productId}"></c:out>">
+                                    <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-end">
+                <h4>Total Price: $<c:out value="${sessionScope.totalCartPrice}"></c:out></h4>
+                <form method="post" action="${pageContext.request.contextPath}/api/protected/checkout-all">
+                    <button type="submit" class="btn btn-primary">Checkout</button>
+                </form>
 
-                    </td>
-                    <td>
-                        <form method="delete" action="${pageContext.request.contextPath}/api/protected/decrease-items">
-                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-            <!-- Add more rows as needed -->
-            </tbody>
-        </table>
-    </div>
-    <div class="text-end">
-        <h4>Total Price: $<c:out value="${sessionScope.totalCartPrice}"></c:out></h4>
-        <form method="post" action="${pageContext.request.contextPath}/api/protected/checkout-all">
-            <button type="submit" class="btn btn-primary">Checkout</button>
-        </form>
+            </div>
+        </div>
+    </c:otherwise>
+</c:choose>
 
-    </div>
-</div>
+
+
 <script>
     // console.log("is it working" )
     // const quantityElements = document.querySelectorAll(".quantity");

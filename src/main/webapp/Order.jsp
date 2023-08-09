@@ -45,7 +45,12 @@
                                     <td><c:out value="${o.name}"></c:out></td>
                                     <td><c:out value="${o.quantity}"></c:out></td>
                                     <td><c:out value="${o.price}"></c:out></td>
-                                    <td><button class="btn btn-danger btn-sm">Cancel</button></td>
+                                    <td>
+                                        <form action="${pageContext.request.contextPath}/api/protected/order/cancel">
+                                            <input type="hidden" name="orderId" value="<c:out value="${o.orderId}"></c:out>" >
+                                            <button class="btn btn-danger btn-sm" type="submit">Cancel</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             </c:forEach>
                             </tbody>

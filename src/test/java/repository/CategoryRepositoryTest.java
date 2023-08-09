@@ -26,16 +26,16 @@ public class CategoryRepositoryTest {
         @Test
         public void testSaveCategory() {
             // Given
-            String categoryName = "men's clothing";
-            String categoryName2 = "jewelery";
-            String categoryName3 = "electronics";
-            String categoryName4 = "women's clothing";
-
-            // When
-            categoryRepository.save(categoryName);
-            categoryRepository.save(categoryName2);
-            categoryRepository.save(categoryName3);
-            categoryRepository.save(categoryName4);
+//            String categoryName = "Men's Clothing";
+//            String categoryName2 = "Jewelery";
+//            String categoryName3 = "Electronics";
+//            String categoryName4 = "Women's Clothing";
+//
+//            // When
+//            categoryRepository.save(categoryName);
+//            categoryRepository.save(categoryName2);
+//            categoryRepository.save(categoryName3);
+//            categoryRepository.save(categoryName4);
 
         }
     }

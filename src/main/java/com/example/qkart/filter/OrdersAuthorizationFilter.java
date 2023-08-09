@@ -29,7 +29,7 @@ public class OrdersAuthorizationFilter implements Filter {
         if(isAuthorized) {
             req.getRequestDispatcher("/api/protected/orders").forward(req, resp);
         } else {
-            resp.sendRedirect(req.getContextPath() + "/Cart.jsp");
+            resp.sendRedirect(req.getContextPath() + "/orders");
         }
     }
 

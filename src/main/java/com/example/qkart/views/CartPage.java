@@ -15,4 +15,5 @@ public class CartPage extends HttpServlet {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/Cart.jsp");
         requestDispatcher.forward(req, resp);
     }
+
 }

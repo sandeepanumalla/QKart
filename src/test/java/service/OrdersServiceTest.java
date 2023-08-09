@@ -86,7 +86,7 @@ public class OrdersServiceTest {
 
     @Test
     void testCancelOrder() {
-        int userId = 1;
-        orderService.cancelOrderById(userId);
+        int orderId = 24;
+        orderService.cancelOrderById(orderId);
     }
 }

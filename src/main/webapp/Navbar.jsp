@@ -26,7 +26,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
+        <% String username = (String) session.getAttribute("username"); %>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
@@ -35,12 +35,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<%=request.getContextPath()%>/products">Products</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
+                <c:if test="${username != null}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%=request.getContextPath()%>/orders">Orders</a>
+                    </li>
+                </c:if>
+
                 <li class="nav-item">
                     <%-- Check if the username attribute is present in the session --%>
-                    <% String username = (String) session.getAttribute("username"); %>
                         <c:choose>
                             <c:when test="${username != null}">
                                 <a class="nav-link" href="#"><c:out value="${username}" /></a>
@@ -51,7 +53,7 @@
                         </c:choose>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/api/protected/cart-items">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/cart">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                             <path d="M0 1.053A.053.053 0 0 1 .053 1h1.397l1.007 7.051A2 2 0 0 0 4.441 10H14a1 1 0 0 1 1 1 1 1 0 0 1-1 1H4.441a2 2 0 1 0-1.964 1.549l-.504 3.529A.5.5 0 0 1 2 16h12a.5.5 0 0 1 .481.374l1 4A.5.5 0 0 1 15 21H1a.5.5 0 0 1-.481-.626l1-4A.5.5 0 0 1 2 16h1.344a2.5 2.5 0 0 1 4.908 0h3.296a2.5 2.5 0 0 1 4.908 0H16a1 1 0 0 1-1-1 1 1 0 0 1 1-1h1a.053.053 0 0 1 .053.053V1.053A.053.053 0 0 1 16 1h-4.952a2.5 2.5 0 1 1-4.096 0H0a.053.053 0 0 1 .053.053z"/>
                         </svg>
