@@ -31,9 +31,9 @@ public class OrderService implements IOrderService{
     }
 
     @Override
-    public void createOrderWhenCartItemsDontExist(int cartId, int productId) throws Exception {
+    public void createOrderWhenCartItemsDontExist(int cartId, int productId, int quantity) throws Exception {
         //crate cartItem
-        cartItemsService.addCartItem(cartId, productId, 1);
+        cartItemsService.addCartItem(cartId, productId, quantity);
 
         //make an order
         CartItems cartItem = cartItemsService.getCartItemByProductId(productId);

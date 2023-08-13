@@ -51,7 +51,6 @@ public class OrdersServlet extends HttpServlet {
         session.setAttribute("ordersList", ordersList);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/orders");
         requestDispatcher.forward(req, resp);
-        // set session
     }
 
 }

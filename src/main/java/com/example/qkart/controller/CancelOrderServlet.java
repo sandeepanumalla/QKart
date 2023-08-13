@@ -38,8 +38,6 @@ public class CancelOrderServlet extends HttpServlet {
         try {
             int orderId = Integer.parseInt(orderIdString);
             orderService.cancelOrderById(orderId);
-//            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/orders");
-//            requestDispatcher.forward(req, resp);
             resp.sendRedirect(req.getContextPath() + "/orders");
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -45,10 +45,10 @@ public class UserService implements IUserService{
 
         Optional<User> user = userRepository.finduserByUsername(username);
         if(user.isEmpty()) {
-            throw new Exception();
+            throw new Exception("you are not registered");
         }
         if(!user.get().getPassword().equals(userLoginRequest.password)) {
-            throw new Exception();
+            throw new Exception("Invalid username or password");
         }
     }
 

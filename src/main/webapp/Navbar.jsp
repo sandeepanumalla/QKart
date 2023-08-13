@@ -69,6 +69,14 @@
                     </span>
                     </a>
                 </li>
+                <c:if test="${sessionScope.username != null}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/api/protected/logout">
+                            <i class="bi bi-box-arrow-right"></i>
+                            Logout
+                        </a>
+                    </li>
+                </c:if>
             </ul>
         </div>
     </div>

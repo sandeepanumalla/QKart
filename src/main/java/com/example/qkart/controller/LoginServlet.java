@@ -7,8 +7,10 @@ import com.example.qkart.repository.ICartItemsRepository;
 import com.example.qkart.repository.IUserRepository;
 import com.example.qkart.service.ICartItemsService;
 import com.example.qkart.service.IUserService;
+import jakarta.validation.ConstraintViolationException;
 import org.hibernate.Session;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,21 +48,31 @@ public class LoginServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-
-        UserLoginRequest userLoginRequest = new UserLoginRequest(username, password);
+        HttpSession httpSession = req.getSession();
 
 
         try {
+
+            UserLoginRequest userLoginRequest = new UserLoginRequest(username, password);
+
             userService.login(userLoginRequest);
             Optional<User> user = userRepository.finduserByUsername(username);
             int cartSize = cartItemsService.getCartSize(user.get().getUserId());
-            HttpSession httpSession = req.getSession();
             httpSession.setAttribute("cartSize", cartSize);
             httpSession.setAttribute("username", username);
+            if(httpSession.getAttribute("errorWhileLogging") != null) {
+                httpSession.removeAttribute("errorWhileLogging");
+            }
             req.getRequestDispatcher("/products").forward(req, resp);
-//            resp.sendRedirect("Products.jsp");
+        } catch (ConstraintViolationException constraintViolationException) {
+            String errorMessage =  constraintViolationException.getMessage();
+            req.setAttribute("errorWhileLogging", errorMessage);
+            resp.sendRedirect(req.getContextPath() + "/Login.jsp");
         } catch (Exception e) {
-            resp.sendRedirect(req.getContextPath() + "/Login.jsp?error=1");
+            String errorMessage = e.getMessage();
+            httpSession.setAttribute("errorWhileLogging", errorMessage);
+            resp.sendRedirect(req.getContextPath() + "/Login.jsp");
+
         }
     }
 }

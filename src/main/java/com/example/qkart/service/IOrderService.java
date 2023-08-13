@@ -10,7 +10,7 @@ public interface IOrderService {
 
     void createOrderWithCartCheckout(List<CartItems> cartItemsList);
 
-    void createOrderWhenCartItemsDontExist(int cartId, int productId) throws Exception;
+    void createOrderWhenCartItemsDontExist(int cartId, int productId, int quantity) throws Exception;
 
     void createOrderWithSingleCartItem(CartItems cartItems);
 

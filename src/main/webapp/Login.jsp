@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: anuma
@@ -23,6 +24,12 @@
       <div class="card">
         <div class="card-body">
           <h3 class="card-title text-center mb-4">Login</h3>
+          <c:if test="${not empty sessionScope.errorWhileLogging}">
+            <div class="alert alert-danger" role="alert" >
+              An error occurred: ${sessionScope.errorWhileLogging}
+            </div>
+          </c:if>
+
           <form action="<%=request.getContextPath()%>/api/login" method="post">
             <div class="form-group">
               <label for="username">Username</label>

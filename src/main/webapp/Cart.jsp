@@ -78,7 +78,11 @@
                                     <input type="hidden" name="quantity" value="<c:out value="${ci.quantity}"></c:out>">
                                     <button class="btn btn-secondary btn-sm increase-quantity">+</button>
                                 </form>
-
+                                <form action="${pageContext.request.contextPath}/api/protected/buy-now" method="post">
+                                    <input type="hidden" name="productId" value="<c:out value="${ci.product.productId}"></c:out>">
+                                    <input type="hidden" name="quantity" value="<c:out value="${ci.quantity}" ></c:out>">
+                                    <button type="submit" class="btn btn-primary">Buy Now</button>
+                                </form>
                             </td>
                             <td>
                                 <form method="post" action="${pageContext.request.contextPath}/api/protected/cart-items/remove">

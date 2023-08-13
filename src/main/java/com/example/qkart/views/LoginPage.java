@@ -12,7 +12,11 @@ import java.io.IOException;
 public class LoginPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/Login.jsp");
-        requestDispatcher.forward(req, resp);
+        if(req.getSession().getAttribute("username") != null) {
+            resp.sendRedirect("products");
+        } else {
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/Login.jsp");
+            requestDispatcher.forward(req, resp);
+        }
     }
 }

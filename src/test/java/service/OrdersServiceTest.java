@@ -64,8 +64,9 @@ public class OrdersServiceTest {
     void testCreateOrderWhenCartItemsDontExist() throws Exception {
         int productId1 = 1;
         int cartId = 1;
+        int quantity = 1;
 
-        orderService.createOrderWhenCartItemsDontExist(cartId ,productId1);
+        orderService.createOrderWhenCartItemsDontExist(cartId ,productId1, quantity);
     }
 
     @Test

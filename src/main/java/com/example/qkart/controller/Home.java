@@ -10,6 +10,7 @@ public class Home {
                 .buildSessionFactory();
 
 
+
         factory.close();
     }
 }

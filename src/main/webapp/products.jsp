@@ -98,12 +98,11 @@
                                 <button type="submit" class="btn btn-dark">Add to Cart</button>
                             </form>
 
-                            <form action="addToCart" method="post">
-<%--                                <input type="hidden" name="productId" value="<c:out value="${p.id}"/>">--%>
+                            <form action="${pageContext.request.contextPath}/api/protected/buy-now" method="post">
+                                <input type="hidden" name="productId" value="<c:out value="${p.productId}"></c:out>">
                                 <button type="submit" class="btn btn-primary">Buy Now</button>
                             </form>
-<%--                            <a href="#" class="btn btn-dark">Add to Cart</a>--%>
-<%--                            <a href="#" class="btn btn-primary">Buy Now</a>--%>
+
                         </div>
                     </div>
                 </div>
