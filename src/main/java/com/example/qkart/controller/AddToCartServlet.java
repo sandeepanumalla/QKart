@@ -68,10 +68,7 @@ public class AddToCartServlet extends HttpServlet {
             req.setAttribute("addedCartItems", addedCartItems);
             int cartSize = cartItemsService.getCartSize(cartId);
             httpSession.setAttribute("cartSize", initialCartSize + cartSize);
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/products");
-            requestDispatcher.forward(req, resp);
-//             request dispatcher or redirect
-//            resp.sendRedirect(req.getContextPath() + "/products");
+            resp.sendRedirect(req.getContextPath() + "/products");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

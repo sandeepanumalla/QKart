@@ -18,9 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class CartServiceTest {
 
-
     private CartRepository kartRepository;
-
 
     private UserRepository userRepository;
 

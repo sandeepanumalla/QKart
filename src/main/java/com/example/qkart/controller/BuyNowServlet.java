@@ -4,6 +4,7 @@ import com.example.qkart.config.AppConfig;
 import com.example.qkart.model.CartItems;
 import com.example.qkart.model.User;
 import com.example.qkart.repository.IUserRepository;
+import com.example.qkart.service.ICartItemsService;
 import com.example.qkart.service.IOrderService;
 
 import javax.servlet.ServletException;
@@ -27,12 +28,15 @@ public class BuyNowServlet extends HttpServlet {
 
     private IUserRepository userRepository;
 
+    private ICartItemsService cartItemsService;
+
 
     @Override
     public void init() throws ServletException {
         AppConfig appConfig = (AppConfig) getServletContext().getAttribute("appConfig");
         this.userRepository = appConfig.userRepository;
         this.orderService = appConfig.orderService;
+        this.cartItemsService = appConfig.cartItemsService;
     }
 
     @Override
@@ -47,7 +51,7 @@ public class BuyNowServlet extends HttpServlet {
         String username = (String) httpSession.getAttribute("username");
         String productIdString = req.getParameter("productId");
         String quantityString = req.getParameter("quantity");
-        if(quantityString == null) {
+            if(quantityString == null) {
             quantityString = "1";
         }
         Optional<User> user = userRepository.finduserByUsername(username);
@@ -58,6 +62,9 @@ public class BuyNowServlet extends HttpServlet {
             int quantity = Integer.parseInt(quantityString);
             // call the createOrders method
             orderService.createOrderWhenCartItemsDontExist(cartId, productId, quantity);
+
+            int cartSize = cartItemsService.getCartSize(cartId);
+            httpSession.setAttribute("cartSize", cartSize);
 
             resp.sendRedirect("orders");
         }

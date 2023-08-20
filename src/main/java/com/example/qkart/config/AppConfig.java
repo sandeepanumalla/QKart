@@ -26,7 +26,7 @@ public class AppConfig {
     public IOrderRepository orderRepository = new OrderRepository(sessionFactory);
     public ProductsService productsService = new ProductsService(productRepository);
 
-    private final ICartItemsRepository cartItemsRepository = new CartItemsRepository(sessionFactory);
+    public ICartItemsRepository cartItemsRepository = new CartItemsRepository(sessionFactory);
 
     public IUserService userService = new UserService(userRepository, cartRepository, modelMapper, validator);
 

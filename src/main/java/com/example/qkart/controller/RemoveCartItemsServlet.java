@@ -37,20 +37,24 @@ public class RemoveCartItemsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession httpSession = req.getSession();
-        String productIdString = req.getParameter("productId");
+        try {
+            HttpSession httpSession = req.getSession();
+            String productIdString = req.getParameter("productId");
 
-        String username = (String) httpSession.getAttribute("username");
-        Optional<User> user = userRepository.finduserByUsername(username);
-        if(user.isEmpty()) {
-            throw new RuntimeException("");
+            String username = (String) httpSession.getAttribute("username");
+            Optional<User> user = userRepository.finduserByUsername(username);
+            if(user.isEmpty()) {
+                throw new RuntimeException("");
+            }
+            int cartId = user.get().getCart().getId();
+            int productId = Integer.parseInt(productIdString);
+            cartItemsService.removeProduct(cartId, productId);
+            int cartSize = cartItemsService.getCartSize(cartId);
+            httpSession.setAttribute("cartSize", cartSize);
+            resp.sendRedirect(req.getContextPath() + "/cart");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        int cartId = user.get().getCart().getId();
-        int productId = Integer.parseInt(productIdString);
-
-        cartItemsService.removeProduct(cartId, productId);
-
-        resp.sendRedirect(req.getContextPath() + "/cart");
     }
 
     @Override
